@@ -1,24 +1,12 @@
-const dotenv = require('dotenv');
-
-dotenv.config()
-
-const dbConnection = require('./connection')
-
 const express = require('express')
 
+// Calling routes
+const movieRoutes = require('./routes/movieRoute')
+
+// Express initial setup
 const app = express()
 
-const port = process.env.PORT || 3000
+// Mounting routes
+app.use('/api/v1/movies', movieRoutes)
 
-
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
-
-
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
-
-
-
+module.exports = app
