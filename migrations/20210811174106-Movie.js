@@ -30,7 +30,7 @@ module.exports = {
 
       {
         freezeTableName: true,
-        timestamps: true,
+        timestamps: false,
       }
 
     )
