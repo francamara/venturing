@@ -27,32 +27,32 @@ exports.createMovie = async (req, res) => {
     const moviesList = await csv().fromFile(uploadPath)
 
     // 5. save in database
-    moviesList.forEach(async movie => {
-        const movieName = movie.Name
-        const movieDescription = movie.Description
-        const movieYear = movie.Year
+    try {
 
-        const movieExists = await Movie.findOne({ where: { name: movieName } })
+        moviesList.forEach(async movie => {
 
-        if (movieExists) return
-
-        if (!movieExists) {
-            try {
-                await Movie.create({
-                    name: movieName,
-                    description: movieDescription,
-                    year: movieYear
-                })
-            } catch (err) {
-                return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ message: 'Cant process entity' })
+            const movieToUpload = {
+                name: movie.Name,
+                description: movie.Description,
+                year: movie.Year
             }
-        }
-    })
 
-    fs.unlink(uploadPath, function (err) {
-        if (err) throw err
-        res.status(StatusCodes.CREATED).json({ message: 'Movie DB updated successfully' })
-    })
+            const movieExists = await Movie.findOne({ where: { name: movieToUpload.name } })
+
+            if (movieExists) return
+
+            await Movie.create(movieToUpload)
+
+        })
+
+        fs.unlink(uploadPath, function (err) {
+            if (err) throw err
+            res.status(StatusCodes.CREATED).json({ message: 'Movie DB updated successfully' })
+        })
+
+    } catch (error) {
+        res.status(StatusCodes.UNPROCESSABLE_ENTITY.json({ message: error }))
+    }
 
 }
 
