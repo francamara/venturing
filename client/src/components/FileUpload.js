@@ -1,4 +1,4 @@
-// import { Button } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import React, { Component } from 'react'
 import axios from 'axios'
 
@@ -20,7 +20,7 @@ class FileUpload extends Component {
     formData.append('movieList', file)
 
     axios({
-      url: 'http://localhost:2000/api/v1/movies',
+      url: 'http://localhost:2000/api/v1/movies/csv',
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       data: formData,
@@ -30,14 +30,24 @@ class FileUpload extends Component {
   render() {
     return (
       <div>
-        <input
-          // className={classes.input}
-          id="contained-button-file"
+        <Button
+          variant="contained"
+          component="label"
           type="file"
           name="file"
           onChange={(e) => this.handleFile(e)}
-        />
-        <button onClick={(e) => this.handleUpload(e)}>Upload</button>
+          style={{ margin: 13 }}
+        >
+          Select File
+          <input type="file" hidden />
+        </Button>
+        <Button
+          variant="contained"
+          onClick={(e) => this.handleUpload(e)}
+          style={{ margin: 13 }}
+        >
+          Upload
+        </Button>
       </div>
     )
   }
