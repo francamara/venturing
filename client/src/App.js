@@ -3,7 +3,7 @@ import MovieList from './pages/MovieList'
 // import Header from './components/Header'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { Button } from '@material-ui/core'
-// import { Router } from 'express'
+import './App.css'
 
 function App() {
   return (
@@ -34,9 +34,3 @@ function App() {
 }
 
 export default App
-
-{
-  /* <Header />
-
-<NewMovie/> */
-}
