@@ -39,7 +39,7 @@ Undo Seeders
 
 # Known issues
 
-The port on the frontend to consume api are hard coded, port 2000 is recommended.
+The url on the frontend to consume api are hard coded, port 2000 is recommended.
 
 ### Files that consume api
 
