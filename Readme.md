@@ -14,13 +14,19 @@ First install dependencies
 npm install
 ```
 
-Backend
+Then run migrations
+
+```
+npx sequelize db:migrate
+```
+
+Run backend
 
 ```
 npm run dev
 ```
 
-Frontend
+Run frontend
 
 ```
 npm run start
